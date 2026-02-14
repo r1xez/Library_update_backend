@@ -1,6 +1,7 @@
 ﻿using Library_update.Abstracts;
 using Library_update.Models;
 using Library_update.Models.Author;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_update.Controllers
@@ -32,6 +33,7 @@ namespace Library_update.Controllers
 
 
         [HttpPost("create")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Create([FromBody] CreateAuthorRequest request)
         {
             var newId = await _authorService.Save(request);
@@ -39,6 +41,7 @@ namespace Library_update.Controllers
         }
 
         [HttpPut("{id}/update")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Update([FromBody] UpdateAuthorRequest request)
         {
             await _authorService.Update(request);
@@ -46,6 +49,7 @@ namespace Library_update.Controllers
         }
 
         [HttpDelete("{id}/delete")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             await _authorService.Delete(id);

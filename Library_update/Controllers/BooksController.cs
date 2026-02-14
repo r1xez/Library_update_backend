@@ -2,6 +2,7 @@
 using Library_update.DAL.Entities;
 using Library_update.Models;
 using Library_update.Models.Book;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_update.Controllers
@@ -35,6 +36,7 @@ namespace Library_update.Controllers
 
 
         [HttpPost("create")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Create([FromBody] CreateBookRequest request)
         {
             if (!ModelState.IsValid)
@@ -45,6 +47,7 @@ namespace Library_update.Controllers
         }
 
         [HttpPut("{id}/update")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Update(int id, [FromBody] BookDTO bookDTO)
         {
             await _bookService.Update(id, bookDTO);
@@ -52,6 +55,7 @@ namespace Library_update.Controllers
         }
 
         [HttpDelete("{id}/delete")]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             await _bookService.Delete(id);
