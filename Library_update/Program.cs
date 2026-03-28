@@ -88,9 +88,12 @@ namespace Library_update
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
-           
+
             app.UseCors("AllowReact");
 
             app.UseAuthentication();
