@@ -60,7 +60,7 @@ namespace Library_update
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection")
+            builder.Configuration.GetConnectionString("Database_Ubuntu")
                 ));
 
             builder.Services.AddHttpClient<IGutendexService, GutendexService>(client =>
